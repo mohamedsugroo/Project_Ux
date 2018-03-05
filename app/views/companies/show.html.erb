@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-4">
+    
+    <div class="card full-width">
+      <div class="card-body">
+        <br> <br>
+        <h5 class="card-title">
+          <%= @company.name %>
+          <br>
+          <small>
+            <span class="text-secondary">
+              <%= @company.number %>
+            </span>
+          </small>
+      </h5>
+        <p class="card-text">
+
+          <p>
+            <strong>City:</strong>
+            <%= @company.city %>
+          </p>
+
+          <p>
+            <strong>Country:</strong>
+            <%= @company.country %>
+          </p>
+
+          <p>
+            <strong>Postcode:</strong>
+            <%= @company.postcode %>
+          </p>
+
+          <p>
+            <strong>Phone number:</strong>
+            <%= @company.phone_number %>
+          </p>
+
+          <p>
+            <strong>Work number:</strong>
+            <%= @company.Work_number %>
+          </p>
+
+        </p>
+
+      </div>
+    </div>
+
+
+    <div class="card bg-light full-width" >
+      <div class="card-body">
+        <h5 class="card-title">Statistics</h5><hr>
+        <div class="card-text">
+            <div class="row">
+              <div class="col">
+                <small class"text-muted">Number of jobs</small> <br>
+                <h4>23456</h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Number of bids</small> <br>
+                <h4>12345</h4>
+              </div>
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="col">
+    
+  </div>
+</div>
+
+
+
+
+
+<p id="notice"><%= notice %></p>
+
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

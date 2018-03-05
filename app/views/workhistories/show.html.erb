@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @workhistory.role %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @workhistory.company_name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @workhistory.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @workhistory.end_date %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @workhistory.summary %>
+</p>
+
+<%= link_to 'Edit', edit_workhistory_path(@workhistory) %> |
+<%= link_to 'Back', workhistories_path %>

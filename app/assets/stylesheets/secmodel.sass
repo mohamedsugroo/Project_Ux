@@ -1,0 +1,35 @@
+.secmodel
+	background: rgba(0, 0, 0, 0.66)
+	position: fixed
+	top: 0
+	right: 0
+	width: 100%
+	height: 100%
+	display: none
+
+	.model_info_box
+		width: 50%
+		height: 100%
+		position: fixed
+		right: 0
+		padding-right: 10px
+		overflow-x: hidden
+		overflow-y: auto
+
+#activator
+	position: fixed
+	right: 0
+	top: 0
+	z-index: 10000
+
+#activator:checked ~ .freezer
+	position: fixed
+	
+	.secmodel
+		display: block
+
+.content
+	padding: 46px
+	padding: 1.25rem
+	font-family: times
+	font-size: 1.2rem

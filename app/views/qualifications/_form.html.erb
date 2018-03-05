@@ -1,0 +1,33 @@
+<%= form_with(model: qualification, local: true) do |form| %>
+  <% if qualification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(qualification.errors.count, "error") %> prohibited this qualification from being saved:</h2>
+
+      <ul>
+      <% qualification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :qtype_id %>
+    <%= form.collection_select :qtype_id, Qtype.all, :id, :name, {promt: 'Choose a category'}, id: :qualification_qtype, class: "form-control" %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :awarded_date %>
+    <%= form.text_field :awarded_date, id: :qualification_awarded_date, type: "date" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiration_date %>
+    <%= form.text_field :expiration_date, id: :qualification_expiration_date, type: "date" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

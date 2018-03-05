@@ -1,0 +1,191 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="row">
+
+  <div class="col-md-8">
+
+
+    <div class="card bg-succes text-white full-width" >
+      <div class="card-body">
+        <h5 class="card-title">
+          Stats
+        </h5>
+        <div class="card-text">
+            <div class="row">
+              <div class="col">
+                <small class"text-muted">Hourly Rate</small> <br>
+                <h4><%= number_to_currency(@job.priceperhour, unit: "£") %> </h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Number of hours</small> <br>
+                <h4><i class="fas fa-clock"></i> <%= @job.number_of_hours %></h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Earnings</small> <br>
+                <h4><%= number_to_currency(@job.priceperhour.to_f * @job.number_of_hours.to_f, unit: "£") %></h4>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="card full-width">
+
+
+      
+
+      <div class="card-body">
+
+        <h2 class="card-title">
+          <%= @job.title %>
+          <br>
+          <small class="card-subtitle mb-2 text-muted"><%= @job.user.company.name %></small>
+        </h2>
+
+          <hr>
+
+
+        <h6 class="card-subtitle mb-2 text-muted">
+          <div class="row">
+            <ul class="col job_stats">
+
+              <li>
+                <i class="fas fa-shield-alt"></i> <%= @job.category.name %>
+              </li>
+
+              <li>
+                <i class="fas fa-tag"></i> 
+                <% if @job.fixedPrice == true %>
+                    Fixed
+                <% elsif @job.fixedPrice == false %>
+                    Negotiable 
+                <% end %>
+              </li>
+
+              <li>
+                <i class="fas fa-pound-sign"></i><%= @job.priceperhour %>.00  
+              </li>
+              
+            </ul>
+
+            <ul class="col job_stats">
+              <li>
+                <i class="fas fa-location-arrow"></i> <%= @job.user.company.city %>, <%= @job.user.company.country %>
+              </li>
+
+              <li>
+                Experience: 0<%= @job.experienceLevel %> years
+              </li>
+
+              <li>
+                <i class="fas fa-chart-line"></i> 238,230 views
+              </li>
+            </ul>
+          </div>
+
+          
+          
+
+
+        </h6>
+
+        <hr>
+
+
+        <p class="card-text">
+          <br>
+          <%= @job.description.html_safe %>
+        </p>
+
+        
+        <%= link_to 'Edit', edit_job_path(@job) %> |
+        <%= link_to 'Back', jobs_path %>
+
+      </div>
+    </div>
+
+    <%= render 'jobs/bids' %>
+
+  </div>
+
+  <div class="col-md-4">
+
+    
+
+    <div class="card full-width">
+      <div class="card-body">
+        <br> <br>
+        <h5 class="card-title">
+          <%=  @job.user.company.name %>
+          <br>
+          <small>
+            <span class="text-secondary">
+              <%=  @job.user.company.number %>
+            </span>
+          </small>
+      </h5>
+        <p class="card-text">
+
+          <p>
+            <strong>City:</strong>
+            <%=  @job.user.company.city %>
+          </p>
+
+          <p>
+            <strong>Country:</strong>
+            <%=  @job.user.company.country %>
+          </p>
+
+          <p>
+            <strong>Postcode:</strong>
+            <%=  truncate(@job.user.company.postcode, length: 4, :omission => '').upcase %>
+          </p>
+
+        </p>
+
+      </div>
+    </div>
+
+    <div class="card bg-succes text-white  full-width" >
+      <div class="card-body">
+        <h5 class="card-title">Statistics</h5>
+        <div class="card-text">
+            <div class="row">
+              <div class="col">
+                <small class"text-muted">Number of jobs</small> <br>
+                <h4><%= @job.user.count_jobs %></h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Number of bids</small> <br>
+                <h4><%= @job.bids.count %></h4>
+              </div>
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <div class="card bg-light full-width" >
+      <div class="container">
+        <h1 class="display-2 text-align-center">
+          <i class="fab fa-earlybirds"></i>
+        </h1>
+        <p class="lead">
+          This job currently has no bids be the first to bid on this job
+        </p>
+
+        <a href="<%= new_job_bid_path(@job) %>" class="btn btn-apply-round btn-lg btn-block">Submit Your Bid</a>
+        <br>
+      </div>
+    </div>
+
+
+  </div>
+</div>

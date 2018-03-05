@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Qtype:</strong>
+  <%= @qualification.qtype %>
+</p>
+
+<p>
+  <strong>Awarded date:</strong>
+  <%= @qualification.awarded_date %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @qualification.expiration_date %>
+</p>
+
+<%= link_to 'Edit', edit_qualification_path(@qualification) %> |
+<%= link_to 'Back', qualifications_path %>

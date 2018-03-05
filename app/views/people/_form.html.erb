@@ -1,0 +1,168 @@
+<%= form_with(model: person, local: true) do |form| %>
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+
+
+  <div class="photo_id_field">
+    <%= form.label :photo_id %>
+    <%= form.file_field :photo_id, id: :person_photo_id %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :hourly_rate %>
+    <%= form.text_field :hourly_rate, id: :person_hourly_rate, class: "form-control", 'aria-describedby': 'hourlyRateHelp', type: 'number' %>
+    
+    <small id="hourlyRateHelp" class="form-text text-muted">
+      The National Minimum Wage (NMW) is the minimum wage per hour a worker is entitled to in the United Kingdom. ( £6.70 )
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :person_first_name, class: "form-control", 'aria-describedby': 'person_first_name' %>
+    
+    <small id="person_first_name" class="form-text text-muted">
+      Your Given name as writen on your Photo ID or Passport 
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :middle_name, "Middle Name (optional)" %>
+    <%= form.text_field :middle_name, id: :person_middle_name, class: "form-control", 'aria-describedby': 'person_middle_name' %>
+    
+    <small id="person_middle_name" class="form-text text-muted">
+      A person's name placed after the first name and before the surname.
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :person_last_name, class: "form-control", 'aria-describedby': 'person_last_name' %>
+    
+    <small id="person_last_name" class="form-text text-muted">
+      Your Surname/Last Name as writen on your Photo ID or Passport
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :first_line_address %>
+    <%= form.text_field :first_line_address, id: :person_first_line_address, class: "form-control", 'aria-describedby': 'person_first_line_address' %>
+    
+    <small id="person_first_line_address" class="form-text text-muted">
+      Your Surname/Last Name as writen on your Photo ID or Passport
+    </small>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      
+      <div class="form-group">
+        <%= form.label :second_line_address, "Second Line of Address (Optional)" %>
+        <%= form.text_field :second_line_address, id: :person_second_line_address, class: "form-control", 'aria-describedby': 'person_second_line_address' %>
+        
+        <small id="person_last_name" class="form-text text-muted">
+          Second Line of Your Address
+        </small>
+
+      </div>
+
+    </div>
+    <div class="col">
+     
+      <div class="form-group">
+        <%= form.label :post_code %>
+        <%= form.text_field :post_code, id: :person_post_code, class: "form-control", 'aria-describedby': 'person_post_code' %>
+        
+        <small id="person_post_code" class="form-text text-muted">
+          Your Current Post Code
+        </small>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <%= form.label :utr, "(UTR) Unique Tax Code" %>
+        <%= form.text_field :utr, id: :person_utr, class: "form-control", 'aria-describedby': 'person_utr' %>
+        
+        <small id="person_utr" class="form-text text-muted">
+          (UTR) Unique Tax Code
+        </small>
+
+      </div>
+
+    </div>
+    <div class="col">
+
+      <div class="form-group">
+        <%= form.label :mobile_number, "Mobile Number" %>
+        <%= form.text_field :mobile_number, id: :person_mobile_number, class: "form-control", 'aria-describedby': 'person_mobile_number' %>
+        
+        <small id="person_mobile_number" class="form-text text-muted">
+          (UTR) Uniqua Refence Number
+        </small>
+
+      </div>
+
+    </div>
+
+    <div class="col">
+
+      <div class="form-group">
+        <%= form.label :home_number, "Home Number" %>
+        <%= form.text_field :home_number, id: :person_home_number, class: "form-control", 'aria-describedby': 'person_home_number' %>
+        
+        <small id="person_home_number" class="form-text text-muted">
+          Home Number
+        </small>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :bio %>
+    <%= form.text_area  :bio, id: :person_bio, class: "form-control", 'aria-describedby': 'person_bio' %>
+    
+    <small id="person_bio" class="form-text text-muted">
+      Treat this the same as your cover latter
+    </small>
+
+  </div>
+
+
+  <div class="field">
+    <%= form.label :car_owner %>
+    <%= form.check_box :car_owner, id: :person_car_owner %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit "Save", class: "btn btn-success btn-lg" %>
+  </div>
+<% end %>

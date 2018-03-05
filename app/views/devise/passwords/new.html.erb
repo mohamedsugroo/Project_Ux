@@ -1,0 +1,31 @@
+<div class="container-login">
+
+  <div class="top">
+    <!-- <h2>Sign in to SECURE<div class="uk">UK <div class="dot"></div></div></h2> -->
+  </div>
+
+  <div class="box">
+
+	  	<small><h5>Forgot your password?</h5></small>
+
+		<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+		  <%= devise_error_messages! %>
+
+		  <div class="field">
+		    <%= f.label :email %><br />
+		    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+		  </div>
+
+		  <div class="actions">
+		    <%= f.submit "Reset Password", class: "btn btn-danger btn-lg btn-block" %>
+		    <%#= f.submit "Send me reset password instructions" %>
+		  </div>
+		<% end %>
+
+	</div>
+
+	<div class="newaccountbox">
+		<%= render "devise/shared/links" %>
+	</div>
+
+</div>

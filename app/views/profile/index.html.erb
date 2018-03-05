@@ -1,0 +1,32 @@
+
+<% @user.each do |user| %>
+
+	<div class="card" style="width: 18rem;">
+	  <img class="card-img-top" src="<%= user.person.photo_id(:large) %>" alt="Card image cap">
+
+	  <div class="hourly_card">
+	  	£<%= user.person.hourly_rate %>
+	  </div>
+
+	  <div class="card-body">
+	    <h5 class="card-title">
+	    	<small>
+		    		<span class="badge badge-danger">Pending Verification</span>
+	    	</small>
+	    	<br>
+	    	
+	    	<%= user.person.first_name %>
+	    	<%= user.person.middle_name %>
+	    	<%= user.person.last_name %>
+	    	<br>
+	    	<small>London, United Kingdom</small>
+	    </h5>
+	    <p class="card-text">
+	    	<%#= user.person.bio %>
+	    </p>
+		
+	    <a href="<%= profile_path(user) %>" class="btn btn-primary btn-lg btn-block">VIEW PROFILE</a>
+	  </div>
+	</div>
+	
+<% end %>

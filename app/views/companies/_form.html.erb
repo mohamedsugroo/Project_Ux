@@ -1,0 +1,95 @@
+<%= form_with(model: company, local: true) do |form| %>
+  <% if company.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+      <ul>
+      <% company.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= form.label :name, "Company name" %>
+    <%= form.text_field :name, id: :company_name, class: "form-control", 'aria-describedby': 'name' %>
+    
+    <small id="hourlyRateHelp" class="form-text text-muted">
+      The name of your company
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :number, "Company number" %>
+    <%= form.text_field :number, id: :company_number, class: "form-control", 'aria-describedby': 'companynumber' %>
+    
+    <small id="companynumber" class="form-text text-muted">
+      Company Registration Number
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :first_line, "First line of address" %>
+    <%= form.text_field :first_line, id: :company_first_line, class: "form-control", 'aria-describedby': 'company_first_line' %>
+    
+    <small id="company_first_line" class="form-text text-muted">
+      The first Line of you address
+    </small>
+
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city, "City" %>
+    <%= form.text_field :city, id: :company_city, class: "form-control", 'aria-describedby': 'company_city' %>
+    
+    <small id="company_city" class="form-text text-muted">
+      City e.g LONDON
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :country, "Country" %>
+    <%= form.text_field :country, id: :company_country, class: "form-control", 'aria-describedby': 'company_country' %>
+    
+    <small id="company_country" class="form-text text-muted">
+      Country
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :postcode %>
+    <%= form.text_field :postcode, id: :company_postcode, class: "form-control", 'aria-describedby': 'company_postcode' %>
+    
+    <small id="company_postcode" class="form-text text-muted">
+      Post Code e.g SW12 3AB
+    </small>
+
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, id: :company_phone_number, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :Work_number %>
+    <%= form.text_field :Work_number, id: :company_Work_number, class: "form-control" %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit "Save", class: "btn btn-success btn-lg" %>
+  </div>
+<% end %>

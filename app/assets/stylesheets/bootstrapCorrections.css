@@ -1,0 +1,8 @@
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgb(255, 255, 255) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: 0 1px 6px rgba(57, 73, 76, 0.25);
+    border-left: 3px solid #1abc9c;
+}

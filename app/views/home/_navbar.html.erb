@@ -1,0 +1,84 @@
+<nav class="navbar mainN">
+    <div class="left">
+      <a href="<%= root_path %>">
+        <div class="brand">
+        </div>
+  
+      </a>
+      
+      <div class="searchbox">
+        <div class="leftOfSearch">
+          <i class="fas fa-search"></i>
+          <button class="iconBtn" id="DropToggler">
+            <i class="fas fa-chevron-down"></i>
+          </button>
+
+          <div class="dropdown-menu hidden" id="dropdown-menu">
+            <a href="#Find Jobs" class="dropdown-item" id="DropToggler">Find Jobs</a>
+            <a href="#Find Contractors" class="dropdown-item" id="DropToggler">Find Contractors</a>
+          </div>
+
+        </div>
+        <input type="search" id="search" placeholder="Find Contractor">
+      </div>
+
+    </div>
+    <div class="right collapsible">
+
+      <ul class="navbar-right">
+        <% if user_signed_in? %>
+
+        <div class="profile_avatar">
+          <button id="profileShow">
+            <%= image_tag current_user.person.photo_id(:small), class: "cover_image" %>
+          </button>
+          <div class="ProfileDropDown hidden" id="dropdown-profile">
+
+              <a href="<%= profile_path(current_user)%>" class="dropdown-item" id="DropToggler">
+                Profile
+              </a>
+              <a href="<%= edit_user_registration_path %>" class="dropdown-item" id="DropToggler">
+                Settings
+              </a>
+              <a href="#Help" class="dropdown-item" id="DropToggler">
+                  Help
+              </a>
+
+              <hr>
+
+              <%= link_to "Sing out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+
+              <div class="dropdown-divider"></div>
+
+          </div>
+        </div>
+
+
+        
+        <% else %>
+
+          <li class="nav-item"> <a class="nav-link" href="#">HOW IT WORKS</a></li>
+          <li class="nav-item"><a class="nav-link" href="<%= new_user_session_path %>">LOGIN</a></li>
+          <li class="nav-item"><a class="nav-link" href="<%= new_user_registration_path %>">SIGN UP</a></li>
+        <% end %>
+
+        <a href="<%= new_job_path %>"> <button class="btn btn-success">Post a Job</button></a>
+      </ul>
+
+    </div>
+
+
+</nav>
+
+
+<script>
+  
+  $("#DropToggler").click(function(){
+    $("#dropdown-menu").toggleClass("hidden");
+  });
+
+  $("#profileShow").click(function(){
+    $("#dropdown-profile").toggleClass("hidden");
+  });
+
+</script>

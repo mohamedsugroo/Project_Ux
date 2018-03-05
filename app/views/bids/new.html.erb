@@ -1,0 +1,97 @@
+
+	
+
+<div class="row" ng-controller="jobsController">
+	<div class="col-md-6">
+		<div class="card_wrapper">
+		  <div class="card-body">
+				<%= render 'form', bid: @bid %>
+		  </div>
+		</div>
+
+	</div>
+
+	<div class="col-md-6">
+
+	    <div class="card full-width">
+	      <div class="card-body">
+	      	<span class="text-secondary">The Job your bidding on</span>
+	      	<br> <br>
+	        <h5 class="card-title">
+	        	<%= @job.title %>
+		    </h5>
+	        <p class="card-text">
+		        <%= truncate(@job.stripped_naked, length: 200)  %>
+		    </p>
+		    <label for="activator" class="btn btn-success btn-apply-round btn-lg"> Preview </label>
+
+	      </div>
+	    </div>
+
+	    <div class="card bg-light full-width" >
+		  <div class="card-body">
+		    <h5 class="card-title">Estimation</h5><hr>
+		    <div class="card-text">
+			    	<div class="row">
+			    		<div class="col">
+				    		<small class"text-muted">Hourly Rate</small> <br>
+				    		<h4><%= number_to_currency(@job.priceperhour, unit: "£") %></h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Number of hours</small> <br>
+				    		<h4><%= @job.number_of_hours %></h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Earnings</small> <br>
+				    		<h4 id="calculation_origin">
+				    			<%= number_to_currency(@job.priceperhour.to_f * @job.number_of_hours.to_f, unit: "£")%>
+				    		</h4>
+				    	</div>
+			    	</div>
+	    	</div>
+
+		  </div>
+		</div>
+
+
+		<div class="card bg-succes text-white full-width" >
+		  <div class="card-body">
+		    <h5 class="card-title">New Estimation</h5><hr>
+		    <div class="card-text">
+			    	<div class="row">
+			    		<div class="col">
+				    		<small class"text-muted">Hourly Rate</small> <br>
+				    		<h4>{{hourly_rate | currency : '£' }} </h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Number of hours</small> <br>
+				    		<h4>{{number_of_hours}}</h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Earnings</small> <br>
+				    		<h4>{{ hourly_rate * number_of_hours | currency : '£'}}</h4>
+				    	</div>
+			    	</div>
+	    	</div>
+
+		  </div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<div class="secmodel">
+	<div class="model_info_box">
+		
+		<%= render 'bids/card'%>
+
+	</div>
+</div>
+
+
+
+
+
+<%#= link_to 'Back', bids_path %>

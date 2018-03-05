@@ -1,0 +1,77 @@
+
+<div class="card full-width">
+  <div class="card-body">
+
+    <a href="{{job.url_link}}">
+      <h5 class="card-title">
+        <div class="row">
+          <div class="col-md-9">
+            {{job.title}}
+          </div>
+          <div class="col-md-3 text-align-right">
+            <small>
+              {{job.time_ago_json}} 
+            </small>
+          </div>
+        </div>
+        
+        
+      </h5>
+
+      <h6 class="card-subtitle mb-2 text-muted">
+        London, United Kingdom <br>
+        {{job.priceperhour | currency : '£' }} an hour<br>
+
+        <span class="badge badge-danger">
+            Price Fixed
+        </span>
+
+        <span class="badge badge-light">
+          {{job.category.name}}
+        </span>
+         
+        
+
+      </h6>
+
+      <p class="card-text">
+        {{job.stripped_naked | limitTo : 200 }}
+        <br>
+        <br>
+      </p>
+
+    </a>
+
+    
+  </div>
+</div>
+
+<div class="card bg-light full-width" >
+  <div class="card-body">
+    <div class="card-text">
+        <div class="row">
+          <div class="col">
+            <small class"text-muted">Hourly Rate</small> <br>
+            <h4>
+              {{job.priceperhour | currency : '£' }}
+            </h4>
+          </div>
+          <div class="col">
+            <small class"text-muted">Number of hours</small> <br>
+            <h4>
+              {{ job.number_of_hours }}
+            </h4>
+          </div>
+          <div class="col">
+            <small class"text-muted">Earn</small> <br>
+            <h4 id="calculation_origin">
+              {{ 
+                job.number_of_hours * job.priceperhour | currency : '£'
+              }}
+            </h4>
+          </div>
+        </div>
+    </div>
+
+  </div>
+</div>

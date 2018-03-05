@@ -1,0 +1,264 @@
+
+
+<%= form_with(model: job, local: true) do |form| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row">
+  
+  <div class="col-md-6">
+
+    <div class="card full-width job_disc">
+    
+      <div class="form-group">
+        <%= form.label :title %>
+        <%= form.text_field :title, id: :job_title, class: "form-control" %>
+
+
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.cktext_area :description, id: :job_description, class: "form-control", rows: "4", cols: "50" %>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+
+    <div class="card full-width bg-light" >
+      <div class="card-body">
+
+        <h6 class="card-title">Location</h6><hr>
+        <div class="card-text">
+
+
+          <div class="form-group">
+            <%= form.label :location_address, "First Line of Address" %>
+            <%= form.text_field :location_address, id: :job_location_address, class: "form-control" %>
+          </div>
+
+          <div class="row">
+            <div class="col">
+
+              <div class="form-group">
+                <%= form.label :location_city, "City" %>
+                <%= form.text_field :location_city, id: :job_location_city, class: "form-control" %>
+              </div>
+
+            </div>
+            <div class="col">
+
+              <div class="form-group">
+                <%= form.label :location_country, "Country" %>
+                <%= form.text_field :location_country, id: :job_location_country, class: "form-control" %>
+              </div>
+              
+            </div>
+          </div>
+
+
+          
+
+          
+
+          <div class="form-group">
+            <%= form.label :location_postcode, "Postcode" %>
+            <%= form.text_field :location_postcode, id: :job_location_postcode, class: "form-control" %>
+          </div>
+
+
+           <br>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card full-width" >
+      <div class="card-body">
+
+        
+
+        <div class="form-group">
+          <%= form.label :category_id %>
+          <%= form.collection_select :category_id, Category.all, :id, :name, {promt: 'Choose a category'}, id: :job_category, class: "form-control" %>
+        </div>
+
+        <div class="field">
+
+          <div class="infoPrice">
+            <div class="row">
+              <div class="col col-lg-3">
+                <%= form.label :fixedPrice %>
+                <%= form.check_box :fixedPrice, id: :job_fixedPrice, class: 'hidden' %>
+                
+                <br>
+
+                <label for="job_fixedPrice">
+                  <div class="togglePrice">
+                    <div class="fatDot"></div>
+                  </div>
+                </label>
+              </div>
+              <div class="col">
+                <div class="infoPricers">
+                  <strong>Note:</strong>
+                  The hourly price for this job post is currently set to <span id="setPrice" class="green"> Negotiable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+
+        </div>
+
+        <div class="form-group">
+          <%= form.label :priceperhour %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">£</span>
+            </div>
+            <%= form.text_field :priceperhour, type: 'number', id: :job_priceperhour, 'aria-label': 'Amount (to the nearest dollar)', class: "form-control", 'placeholder': '0', 'ng-model':'perHour' %>
+            <div class="input-group-append">
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+          <%= form.label :number_of_hours %>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fas fa-clock"></i>
+              </span>
+            </div>
+            <%= form.text_field :number_of_hours,type: 'number', id: :job_number_of_hours, 'aria-label': 'Number of hours', class: "form-control", 'placeholder': '0', 'ng-model':'numberOfHours'  %>
+          </div>
+
+        </div>
+
+
+        
+
+
+        <div class="form-group">
+          <%= form.label :experience_Level %>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Years</span>
+            </div>
+            <%= form.text_field :experienceLevel, id: :job_experienceLevel, class: "form-control", 'placeholder': '0', type: 'number'  %>
+          </div>
+
+          
+        </div>
+
+        </div>
+    </div>
+
+    <br>
+
+
+    <div class="card full-width bg-light" >
+      <div class="card-body">
+
+        <h5 class="card-title">Estimated Cost</h5><hr>
+        <div class="card-text">
+            <div class="row">
+              <div class="col">
+                <small class"text-muted">Hourly Rate</small> <br>
+                <h4>{{perHour | currency : '£' }} </h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Number of hours</small> <br>
+                <h4>{{numberOfHours}}</h4>
+              </div>
+              <div class="col">
+                <small class"text-muted">Earnings</small> <br>
+                <h4>{{ perHour * numberOfHours | currency : '£'}}</h4>
+              </div>
+            </div>
+        </div>
+
+        <br> <br>
+
+        <div class="actions">
+          <%= form.submit "Save", class: 'btn btn-done btn-lg' %>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    
+
+
+  </div>
+</div>
+
+  
+
+
+  
+<% end %>
+
+
+
+<% if user_signed_in? %>
+  <script>
+    var user_id = "<%= current_user.id %>";
+    console.log("User_id:" + " " + user_id);
+    document.getElementById('job_user_id').value = user_id;
+  </script>
+
+<% end %>
+
+
+
+<script>
+
+  $('#job_fixedPrice').click(function() {
+    if($('#job_fixedPrice').is(':checked')) {
+      console.log("it's checked"); 
+      $(".togglePrice").addClass("moveRight");
+      $("#setPrice").removeClass("green");
+      $("#setPrice").addClass("red");
+      $("#setPrice").text("Fixed")
+    } else{
+      console.log("Not Checked");
+      $(".togglePrice").removeClass("moveRight");
+      $("#setPrice").removeClass("red");
+      $("#setPrice").addClass("green");
+      $("#setPrice").text("Negotiable")
+
+    }
+  });
+
+</script>
+
+
+
+<style>
+  .cke_contents {
+    min-height: 812px !important;
+  }
+
+</style>

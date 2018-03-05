@@ -1,0 +1,316 @@
+<% if @person.count == 1 %>
+
+<div class="row show_page">
+
+
+	<div class="col-md-4">
+
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="<%= @user.person.photo_id(:large) %>" alt="Card image cap">
+		  <div class="hourly_card">
+		  	£<%= @user.person.hourly_rate %>
+		  </div>
+
+		  <div class="card-body">
+
+		    <h5 class="card-title">
+		    	
+		    	<%= @user.person.first_name %> <%= @user.person.middle_name %> <%= @user.person.last_name %>
+		    	<br>
+		    	<small>London, United Kingdom</small>
+		    	<br>
+		    	<small>
+		    		<span class="badge badge-danger">Pending Verification</span>
+		    	</small>
+		    	<hr>
+		    	<small><strong>Hourly Rate</strong>
+		    		<br>
+		    		£<%= @user.person.hourly_rate %>.00	 
+			    </small>
+		    	<br>
+		    	<small><strong>Mobile Number :</strong>
+			    	<br>076 5847 578</small>
+		    	<br>
+		    	<small><strong>Home Number :</strong> 
+			    	<br>0208 7485 475 </small>
+
+		    	<br>
+
+		    	<small><strong>Car Owner :</strong> 
+			    	<% if @user.person.car_owner == true %>
+			    		Yes
+			    	<% else %>
+			    		No
+			    	<% end %>
+
+			    </small>
+				
+		    </h5>
+		    <p class="card-text">
+		    	<% if user_signed_in? %>
+		    		
+					<% if current_user.id == @user.person.user_id %>
+					
+					<a href="<%= settings_user_path(@user.person)%>" class="btn btn-warning">
+						Edit Profile
+					</a>
+
+					<%= link_to 'Destroy', @user.person, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+					
+			    	<% end %>
+
+		    	<% end %>
+
+		    	
+		    </p>
+
+		  </div>
+		</div>
+
+		
+
+	</div>
+
+
+
+	<div class="col-md-8">
+
+		<div class="card">
+		  <div class="card-body">
+		    <h5 class="card-title">About <%= @user.person.first_name %> <%= @user.person.last_name %></h5>
+		    <p class="card-text">
+		    	<%= @user.person.bio %>
+		    </p>
+		  </div>
+		</div>
+
+		
+		<br><br>
+		
+		<div class="card">
+		  <div class="card-header">
+		  	<div class="row">
+		  		<div class="col">
+		  			<h4>
+		  				Work History
+				    </h4>
+
+		  		</div>
+		  		<div class="col text-algin-right">
+		  			<a href="<%= new_workhistory_path %>" class="btn btn-success" >
+			  			Add Work History
+			  		</a>
+
+		  		</div>
+		  	</div>
+		    
+
+		  </div>
+		  <div class="card-body">
+		  	<% @workhistories.each do |work| %>
+			  	<div class="remove_hr">
+			  		
+			    <h5 class="card-title">
+			    	<%= work.role %> 
+			    	<small> | <%= work.company_name %></small>
+			    </h5>
+			    <small> <%= work.start_date %> -  <%= work.end_date %></small>
+			    <br><br>
+			    <p class="card-text">
+				    <%= work.summary %>
+					<br>
+					<br>
+
+				    <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#exampleModalLong<%= work.id %>">
+					  VIEW FULL DESCRIPTION
+					</button>
+				</p>
+
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModalLong<%= work.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLongTitle">
+					        <%= work.role %>
+					        <br>
+						    <small>Company: <%= work.company_name %></small>
+						    <br>
+						    <small> <%= work.start_date %> -  <%= work.end_date %></small>
+						</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        
+						<small>
+							<h6>Summary | </h6>
+						</small>
+				        <p>
+				        	<%= work.summary %>
+				        </p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+
+				<hr>
+
+			  	</div>
+
+		  	<% end %>
+
+		  </div>
+		</div>
+		<br><br>
+		<div class="card">
+		  <div class="card-header">
+		    
+		    <div class="row">
+		  		<div class="col">
+		  			<h4>Qualifications</h4>
+		  		</div>
+		  		<div class="col text-algin-right">
+		  			<a href="<%= new_qualification_path %>" class="btn btn-success" >
+			  			Add New Qualification
+			  		</a>
+
+		  		</div>
+		  	</div>
+		  </div>
+		  <div class="card-body">
+
+		  	<% @qualifications.each do |q| %>
+			  	<div class="qfc remove_hr">
+				    <%= q.qtype.name %>
+				    <br>
+					<small>Awarded Date | <%= q.expiration_date %></small>
+					<br>
+					<% if user_signed_in? %>
+		    		
+						<% if current_user.id == @user.person.user_id %>
+							<%= link_to 'Edit', edit_qualification_path(q), class: "btn btn-warning"%>
+							<%= link_to 'Destroy', q, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
+					<% end %>
+
+				    <hr>
+			  	</div>
+		    <% end %>
+
+		  </div>
+		</div>	
+
+		<br> <br>
+		<div class="card">
+		  <div class="card-header">
+		    
+		    <div class="row">
+		  		<div class="col">
+		  			<h4>Licences</h4>
+		  		</div>
+		  		<div class="col text-algin-right">
+		  			<a href="<%= new_licence_path %>" class="btn btn-success" >
+			  			Add New Licence
+			  		</a>
+		  		</div>
+		  	</div>
+		  </div>
+		  <div class="card-body">
+
+		  	<% @licences.each do |q| %>
+			  	<div class="qfc remove_hr">
+				    <%= q.ltype.name %>
+				    <br>
+					<small>Awarded Date | <%= q.expiration_date %></small>
+					<br>
+					<% if user_signed_in? %>
+		    		
+						<% if current_user.id == @user.person.user_id %>
+
+						<%= link_to 'Edit', edit_licence_path(q), class: "btn btn-warning"%>
+						<%= link_to 'Destroy', q, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
+					<% end %>
+				    <hr>
+			  	</div>
+		    <% end %>
+
+		  </div>
+		</div>
+		
+			
+
+	</div>
+
+</div>
+
+<% else %>
+
+<div class="alert alert-warning" role="alert">
+  Please Complete Your Sign Up Proccess by Creating a profile.
+</div>
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="jumbotron card">
+		  <h1 class="display-6">
+		  	<small>Create a Personal Profile</small>
+		  </h1>
+		  <p>
+		  	Creating a personal profile will give you the ability to bid on any given job.
+
+		  	<div class="alert alert-info" role="alert">
+			  	Personal profile is suitable for security guards. please note by creating a personal profile you will not be able to post jobs
+			</div>
+		  	
+		  </p>
+		  <p class="lead">
+		    <a class="btn btn-primary btn-lg" href="<%= new_person_path(@user.person)%>" role="button">
+			    Created Personal Profile
+			</a>
+		  </p>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="jumbotron card">
+		  <h1 class="display-6">
+		  	<small>
+		  		Create Company Profile
+		  	</small>
+		  </h1>
+		  <p>
+
+		  	Creating a company profile will give you the ability to post jobs.
+
+		  	<div class="alert alert-info" role="alert">
+				Company profile is suitable for companies who wish to post jobs only. 
+				<br>
+				Companies are not allowed to bid on jobs as the biding system is strictly for individual contractors 
+			</div>
+		  </p>
+		  <p class="lead">
+		    <a class="btn btn-primary btn-lg" href="<%= new_person_path(@user.person)%>" role="button">
+			    Create Company Profile
+			</a>
+		  </p>
+		</div>
+
+	</div>
+</div>
+	
+<% end %>
+
+
+<br>
+<br>
+<br>
+<br>

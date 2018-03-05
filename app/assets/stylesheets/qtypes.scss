@@ -1,0 +1,7 @@
+.remove_hr {
+	&:last-child {
+		hr {
+			display: none
+		}
+	}
+}

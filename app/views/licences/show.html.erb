@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @licence.number %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @licence.expiration_date %>
+</p>
+
+<%= link_to 'Edit', edit_licence_path(@licence) %> |
+<%= link_to 'Back', licences_path %>

@@ -1,0 +1,45 @@
+
+
+
+
+<div class="container-login">
+
+
+  <div class="top">
+    <!-- <h2>Sign in to SECURE<div class="uk">UK <div class="dot"></div></div></h2> -->
+  </div>
+
+  <div class="box">
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <small><strong><%= f.label :email, 'Username or email address' %></strong></small>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <small><strong><%= f.label :password %></strong></small>
+        <%= f.password_field :password, autocomplete: "off" , class: 'form-control' %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: "btn btn-success btn-lg btn-block" %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="newaccountbox">
+    New to SECURE UK? <%= link_to "Create an account", new_registration_path(resource_name) %>
+  </div>
+    
+
+</div>

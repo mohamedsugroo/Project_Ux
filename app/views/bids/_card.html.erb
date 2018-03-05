@@ -1,0 +1,43 @@
+
+<div class="card full-width">
+	      <div class="card-body">
+	      	<span class="text-secondary">
+	      		Job Preview
+	      	</span>
+	      	<br> <br>
+	        <h2 class="card-title">
+	        	<%= @job.title %>
+		    </h2>
+	        <div class="card-text content">
+		        <%= @job.description.html_safe %>
+		    </div>
+	        <label for="activator" class="btn btn-apply-round btn-lg"> Close Preview </label>
+
+	      </div>
+	    </div>
+
+	    <div class="card bg-light full-width" >
+		  <div class="card-body">
+		    <h5 class="card-title">Estimation</h5><hr>
+		    <div class="card-text">
+			    	<div class="row">
+			    		<div class="col">
+				    		<small class"text-muted">Hourly Rate</small> <br>
+				    		<h4><%= number_to_currency(@job.priceperhour, unit: "£") %></h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Number of hours</small> <br>
+				    		<h4><%= @job.number_of_hours %></h4>
+				    	</div>
+			    		<div class="col">
+				    		<small class"text-muted">Earnings</small> <br>
+				    		<h4 id="calculation_origin">
+				    			<%= number_to_currency(@job.priceperhour.to_f * @job.number_of_hours.to_f, unit: "£")%>
+				    		</h4>
+				    	</div>
+			    	</div>
+	    	</div>
+
+		  </div>
+		</div>
+
