@@ -1,0 +1,30 @@
+.head_rapper {
+	background: #f5f6fa;
+	width: 100%;
+	margin-top: -60px;
+	padding-top: 42px;
+	padding-bottom: 42px;
+}
+
+.sign_up_box_home {
+	background: white;
+	width: 400px;
+	height: 400px;
+	margin: 0 auto;
+	padding: 16px;
+}
+
+
+.finbox_home{
+	padding-top: 60px;
+	.title {
+		font-size: 3.8rem;
+		font-weight: 400;
+		width: 500px;
+		// background: red;
+	}
+	.info_content {
+		font-size: 1.24rem;
+		font-weight: 300;
+	}
+}

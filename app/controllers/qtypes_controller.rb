@@ -1,5 +1,6 @@
 class QtypesController < ApplicationController
   before_action :set_qtype, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new]
 
   def index
     @qtypes = Qtype.all

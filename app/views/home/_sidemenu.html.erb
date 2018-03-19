@@ -1,8 +1,18 @@
 <div class="list-group" id="list-tab" role="tablist">
 
+	<% if current_user.person? %>
+		
+
 	<a class="list-group-item list-group-item-action" id="list-home-list" href="<%= settings_user_path(current_user.person) %>">Personal Profile</a>
 
+	<% end %>
+
+	<% if current_user.company? %>
+
+
 	<a class="list-group-item list-group-item-action" id="list-profile-list" href="<%= settings_company_path(current_user.company) %>" >Company Profile</a>
+
+	<% end %>
 
 	<a class="list-group-item list-group-item-action" id="list-messages-list" href="<%= edit_user_registration_path %>">Account</a>
 	

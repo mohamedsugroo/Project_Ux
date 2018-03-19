@@ -1,6 +1,8 @@
 class Person
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Slug
+
   field :first_name, type: String
   field :middle_name, type: String
   field :last_name, type: String
@@ -13,6 +15,7 @@ class Person
   field :home_number, type: String
   field :hourly_rate, type: String
   field :car_owner, type: Mongoid::Boolean
+  slug :sluggable
 
   has_mongoid_attached_file :photo_id,
   :styles => {
@@ -23,4 +26,8 @@ class Person
   validates_attachment_content_type :photo_id, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   belongs_to :user
+
+  def sluggable
+    "#{first_name}#{last_name}#{id}"
+  end
 end

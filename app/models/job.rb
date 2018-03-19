@@ -1,6 +1,7 @@
 class Job
   include Mongoid::Document
   include Mongoid::Search
+  include Mongoid::Slug
   include ActionView::Helpers::DateHelper
 
   field :title, type: String
@@ -17,6 +18,7 @@ class Job
   field :location_city, type: String
   field :location_country, type: String
   field :location_postcode, type: String
+  slug :title
 
 
 
@@ -48,6 +50,10 @@ class Job
 
   def time_ago_json
     time_ago_in_words(self.timeago)
+  end
+
+  def searchable
+    "#{title} , £#{priceperhour} , #{location_city} , #{location_country}, #{location_postcode}"
   end
 
 end

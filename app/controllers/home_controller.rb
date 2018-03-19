@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
 
-	# before_action :authenticate_user!
-
 	def index
+	end
+
+	def search
+		@jobs = Job.all
 	end
 
 end

@@ -1,5 +1,6 @@
 class Company
   include Mongoid::Document
+  include Mongoid::Slug
   field :name, type: String
   field :number, type: String
   field :first_line, type: String
@@ -10,6 +11,8 @@ class Company
   field :Work_number, type: String
   field :created_at, type: String
   field :updated_at, type: String
+  slug :name
+
 
   before_create :create_time
   before_update :updated_time

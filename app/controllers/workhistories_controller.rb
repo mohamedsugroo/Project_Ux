@@ -1,5 +1,6 @@
 class WorkhistoriesController < ApplicationController
   before_action :set_workhistory, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new]
 
   def index
     @workhistories = Workhistory.all

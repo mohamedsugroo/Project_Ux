@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new]
 
   def index
     @jobs = Job.all.order("updated_at DESC")
@@ -7,6 +8,7 @@ class JobsController < ApplicationController
 
   def show
     @bids = Bid.where(:job_id => @job.id)
+    set_meta_tags title: @job.title
   end
 
   def new

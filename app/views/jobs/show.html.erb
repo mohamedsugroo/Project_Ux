@@ -42,7 +42,11 @@
         <h2 class="card-title">
           <%= @job.title %>
           <br>
-          <small class="card-subtitle mb-2 text-muted"><%= @job.user.company.name %></small>
+          <small class="card-subtitle mb-2 text-muted">
+            <a href="<%=  company_path(@job.user.company.id) %>">
+              <%=  @job.user.company.name %>
+            </a>
+            </small>
         </h2>
 
           <hr>
@@ -119,30 +123,28 @@
       <div class="card-body">
         <br> <br>
         <h5 class="card-title">
-          <%=  @job.user.company.name %>
+          <a href="<%=  company_path(@job.user.company.id) %>">
+            <%=  @job.user.company.name %>
+          </a>
+          
           <br>
           <small>
             <span class="text-secondary">
               <%=  @job.user.company.number %>
             </span>
           </small>
+          <br>
+          <small>
+          <strong>Location</strong> <br>
+            <%=  @job.user.company.city %>, 
+            <%=  @job.user.company.country %>
+            <br>
+            <strong>Postcode</strong> <br>
+            <%=  truncate(@job.user.company.postcode, length: 4, :omission => '').upcase %>
+          </small>
       </h5>
         <p class="card-text">
-
-          <p>
-            <strong>City:</strong>
-            <%=  @job.user.company.city %>
-          </p>
-
-          <p>
-            <strong>Country:</strong>
-            <%=  @job.user.company.country %>
-          </p>
-
-          <p>
-            <strong>Postcode:</strong>
-            <%=  truncate(@job.user.company.postcode, length: 4, :omission => '').upcase %>
-          </p>
+            
 
         </p>
 

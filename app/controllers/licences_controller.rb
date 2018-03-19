@@ -1,5 +1,6 @@
 class LicencesController < ApplicationController
   before_action :set_licence, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new]
 
   def index
     @licences = Licence.all

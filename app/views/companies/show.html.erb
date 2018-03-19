@@ -53,21 +53,125 @@
             <div class="row">
               <div class="col">
                 <small class"text-muted">Number of jobs</small> <br>
-                <h4>23456</h4>
+                <h4><%= @jobs.count %></h4>
               </div>
               <div class="col">
                 <small class"text-muted">Number of bids</small> <br>
-                <h4>12345</h4>
+                <h4><%=  @bids.count %></h4>
               </div>
 
             </div>
         </div>
+
 
       </div>
     </div>
 
   </div>
   <div class="col">
+
+    <% @jobs.each do |job| %>
+
+
+      <div class="job">
+        <div class="card full-width">
+          <div class="card-body">
+
+            <a href="<%= job_path(job) %>">
+              <h5 class="card-title">
+                <div class="row">
+                  <div class="col-md-9">
+                    <%= job.title %>
+                  </div>
+                  <div class="col-md-3 text-align-right">
+                    <small>
+                      <%= time_ago_in_words(job.timeago)%> <i class="far fa-clock"></i> 
+                    </small>
+                  </div>
+                </div>
+                
+                
+              </h5>
+
+              <h6 class="card-subtitle mb-2 text-muted">
+                <%= job.user.company.city %>, <%= job.user.company.country %> <br>
+                £<%= job.priceperhour %> an hour<br>
+                
+                  <% if job.fixedPrice == true %>
+                    <span class="badge badge-danger">
+                      Price Fixed
+                    </span>
+                  <% elsif job.fixedPrice == false %>
+                    <span class="badge badge-success ">
+                      Negotiable 
+                    </span>
+                  <% end %>
+
+                <span class="badge badge-light">
+                  <%= job.category.name %>
+                </span>
+                 
+                
+
+              </h6>
+
+              <p class="card-text">
+                <%= truncate(job.stripped_naked, length: 200) %>
+                <br>
+                <br>
+              </p>
+
+            </a>
+
+            <% if user_signed_in? %>
+              <% if current_user.id == job.user_id %>
+                <!-- <hr> -->
+                <%#= link_to 'Show', job, class: 'btn btn-primary' %>
+                <%#= link_to 'Edit', edit_job_path(job), class: 'btn btn-warning' %>
+                <%#= link_to 'Destroy', job, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            <% end %>
+
+            
+          </div>
+        </div>
+
+        <div class="card bg-light full-width" >
+          <div class="card-body">
+            <div class="card-text">
+                <div class="row">
+                  <div class="col">
+                    <small class"text-muted">Hourly Rate</small> <br>
+                    <h4>£<%= job.priceperhour %>.00</h4>
+                  </div>
+                  <div class="col">
+                    <small class"text-muted">Number of hours</small> <br>
+                    <h4><%= job.number_of_hours %></h4>
+                  </div>
+                  <div class="col">
+                    <small class"text-muted">Cost</small> <br>
+                    <h4 id="calculation_origin">
+                      £<%= (job.priceperhour.to_f * job.number_of_hours.to_f)%>
+                    </h4>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        </div>
+
+        <br>
+
+
+            <% job.bids.each do |bid|%>
+              <%= bid.id %>
+            <% end %>  
+            
+
+    <% end %>
     
   </div>
 </div>

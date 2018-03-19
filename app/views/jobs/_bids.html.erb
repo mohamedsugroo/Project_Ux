@@ -1,20 +1,24 @@
 <br><br>
-<h2>Bids</h2>
+
+<div class="container">
+	<!-- <h2>Bids</h2> -->
+</div>
+
 <div class="row">
 
 <% @job.bids.each do |bid| %>
-<div class="col">
+<!-- <div class="col">
    
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
+      <h5 class="card-title"><%= bid.user.person.first_name %></h5>
       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <a class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
 
-</div>
+</div> -->
 
 <% end %>
 </div>

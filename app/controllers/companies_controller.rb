@@ -6,6 +6,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    @jobs = Job.where(:user_id => @company.user_id)
+    @bids = Bid.where(:user_id => @company.user_id)
+
   end
 
   def new

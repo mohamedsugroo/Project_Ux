@@ -1,0 +1,77 @@
+	<script>
+		var user_id = "<%= current_user.id %>";
+		console.log("User_id:" + " " + user_id);
+	</script>
+
+
+
+<div class="search_bar card full-width padding-10 bg-dark text-white">
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+			    <label for="searchtitle">
+				    <strong> What </strong>
+				</label>
+			    <input type="search" class="form-control" id="searchtitle" aria-describedby="searchHelp" placeholder="Search" ng-model="searchTitle.title">
+			    <small id="searchHelp" class="form-text">
+				    job title, keywords, or company.
+				</small>
+
+			</div>	
+		</div>
+		<div class="col">
+
+			<div class="form-group">
+			    <label for="searchPostcode">
+				    <strong> Where</strong>
+				</label>
+			    <input type="text" class="form-control" id="searchPostcode" aria-describedby="postcodeHelp" placeholder="SW12 3AB" ng-model="searchTitle.location_postcode" ng-model="searchArea.location_postcode">
+			    <small id="searchHelp" class="form-text">city or postcode</small>
+			</div>	
+
+		</div>
+	</div>
+</div>
+
+
+<br>
+<br>
+
+<div class="row">
+	<div class="col-md-8">
+		
+		<div class="jobs_listing" ng-controller="jobsController">
+			<div class="animated bounceInLeft" ng-repeat="job in filterdShows = ( jobsList | orderBy: 'created_at':true| filter:searchTitle | filter:searchArea )" >
+				<%= render 'home/jobsList' %>
+				<br> <br>
+			</div>
+		</div>
+	
+	</div>
+	<div class="col-md-4">
+		
+
+
+		<div class="card bg-light full-width text-align-center">
+      <div class="container">
+      	<br><br>
+        <h1 class="display-2 text-align-center">
+          <i class="fas fa-clipboard"></i>
+        </h1>
+        <p class="lead">
+          Wish to post a job like this?
+        </p>
+
+	        <a href="<%= new_job_path %>" 
+	        	class="btn btn-apply-round btn-lg btn-block">
+	        	
+	        	Post a Job
+
+	        </a>
+      	<br><br>
+        
+      </div>
+    </div>
+
+	</div>
+</div>

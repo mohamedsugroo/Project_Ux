@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'errors/error_404'
+
+  get 'errors/error_422'
+
+  get 'errors/error_500'
+
+  resources :searches, path: '/search/'
   mount Ckeditor::Engine => '/ckeditor'
   resources :companies
   resources :ltypes

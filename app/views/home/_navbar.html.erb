@@ -2,16 +2,18 @@
     <div class="left">
       <a href="<%= root_path %>">
         <div class="brand">
+          <!-- <span class="beta">Beta</span> -->
         </div>
   
       </a>
       
+        <%= form_for Search.new do |f| %>
       <div class="searchbox">
         <div class="leftOfSearch">
           <i class="fas fa-search"></i>
-          <button class="iconBtn" id="DropToggler">
+          <label class="iconBtn" id="DropToggler">
             <i class="fas fa-chevron-down"></i>
-          </button>
+          </label>
 
           <div class="dropdown-menu hidden" id="dropdown-menu">
             <a href="#Find Jobs" class="dropdown-item" id="DropToggler">Find Jobs</a>
@@ -19,8 +21,12 @@
           </div>
 
         </div>
-        <input type="search" id="search" placeholder="Find Contractor">
+
+           <%= f.text_field :name, id: "search", placeholder: "Find Contractor" %>
+           
       </div>
+       <% end %>
+      
 
     </div>
     <div class="right collapsible">
@@ -37,11 +43,18 @@
               <a href="<%= profile_path(current_user)%>" class="dropdown-item" id="DropToggler">
                 Profile
               </a>
+
+              <% if current_user.company? %>
+                
+                <a href="<%= company_path(current_user.company) %>" class="dropdown-item" id="DropToggler">
+                    Company Profile
+                </a>
+
+              <% end %>
+
+
               <a href="<%= edit_user_registration_path %>" class="dropdown-item" id="DropToggler">
                 Settings
-              </a>
-              <a href="#Help" class="dropdown-item" id="DropToggler">
-                  Help
               </a>
 
               <hr>

@@ -23,7 +23,9 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'popper_js', '~> 1.12.9'
 gem 'mongoid-paperclip'
 gem 'mongoid_search'
+gem 'mongoid-slug'
 gem 'ckeditor'
+gem 'meta-tags'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

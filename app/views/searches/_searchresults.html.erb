@@ -1,0 +1,17 @@
+<div class="container">
+	<p>
+	  <strong>Search Results For :</strong>
+	  <%= @search.name %>
+	</p>
+
+</div>
+
+<input id="search_query" ng-init="searchQuery.searchable = '<%= @search.name %>'" type="search" ng-model="searchQuery.searchable" hidden >
+
+
+<div class="jobs_listing" ng-controller="jobsController">
+	<div class="animated bounceInLeft" ng-repeat="job in filterdShows = ( jobsList | orderBy: 'created_at':true | filter:searchQuery.searchable)" >
+		<%= render 'home/jobsList' %>
+		<br> <br>
+	</div>
+</div>
