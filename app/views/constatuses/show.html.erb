@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @constatus.note %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @constatus.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @constatus.updated_at %>
+</p>
+
+<%= link_to 'Edit', edit_constatus_path(@constatus) %> |
+<%= link_to 'Back', constatuses_path %>

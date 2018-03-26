@@ -1,27 +1,21 @@
 <br><br>
 
 <div class="container">
-	<!-- <h2>Bids</h2> -->
+	<h6>Bids</h6>
 </div>
 
+<div class="container">
 <div class="row">
+  <% @job.bids.each do |bid| %>
+    <div class="bidcard">
 
-<% @job.bids.each do |bid| %>
-<!-- <div class="col">
-   
-
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title"><%= bid.user.person.first_name %></h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a class="btn btn-primary">Go somewhere</a>
+      <div class="avatar">
+      </div>
+            <h2>Name</h2>
     </div>
-  </div>
 
-</div> -->
-
-<% end %>
+  <% end %>
 </div>
 
-
+</div>
 <br><br>

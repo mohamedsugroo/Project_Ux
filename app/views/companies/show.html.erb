@@ -52,12 +52,19 @@
         <div class="card-text">
             <div class="row">
               <div class="col">
-                <small class"text-muted">Number of jobs</small> <br>
+                <small class"text-muted">Jobs</small> <br>
                 <h4><%= @jobs.count %></h4>
               </div>
               <div class="col">
-                <small class"text-muted">Number of bids</small> <br>
+                <small class"text-muted">Bids</small> <br>
                 <h4><%=  @bids.count %></h4>
+
+              </div>
+
+              <div class="col">
+                <small class"text-muted">Hires</small> <br>
+                <h4><%=  @company.hire.count %></h4>
+                
               </div>
 
             </div>

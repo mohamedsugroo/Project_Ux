@@ -1,19 +1,91 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="col">
+		
 
-<p>
-  <strong>Hourly rate:</strong>
-  <%= @bid.hourly_rate %>
-</p>
 
-<p>
-  <strong>Number of hours:</strong>
-  <%= @bid.number_of_hours %>
-</p>
 
-<p>
-  <strong>Note:</strong>
-  <%= @bid.note %>
-</p>
+		<div class="card full-width">
+			<div class="card-body">
+				<br>
+				<h5 class="card-title">
+					<%= @bid.user.person.full_name %>
+				<br>
+				<small>
+				<span class="text-secondary">
+					<%= @bid.user.person.address %>
+				</span>
+				</small>
+				<br>
 
-<%= link_to 'Edit', edit_bid_path(@bid) %> |
-<%= link_to 'Back', bids_path %>
+
+				<small><strong>Mobile Number :</strong>
+			    	<br>076 5847 578</small>
+		    	<br>
+		    	<small><strong>Home Number :</strong> 
+			    <br>0208 7485 475 </small>
+		    	<br>
+		    	<small><strong>Car Owner :</strong>  </small>
+				</h5>
+				<p class="card-text">
+
+				</p>
+
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<div class="col">
+		
+
+		<div class="card full-width">
+			<div class="container">
+				<p>
+				  <strong>Hourly rate:</strong>
+				  <%= @bid.hourly_rate %>
+
+				  <strong>Number of hours:</strong>
+				  <%= @bid.number_of_hours %>
+
+				  <strong>Note:</strong>
+				  <%= @bid.note %>
+				</p>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+
+
+
+
+<div class="card-body">
+
+		    <h5 class="card-title">
+		    	
+		    	Mohamed Ahmed Hassan
+		    	<br>
+		    	<small>London, United Kingdom</small>
+		    	<br>
+		    	<small>
+		    		<span class="badge badge-danger">Pending Verification</span>
+		    	</small>
+		    	<hr>
+		    	<small><strong>Hourly Rate</strong>
+		    		<br>
+		    		£19.00	 
+			    </small>
+		    	<br>
+		    	
+
+			    </small>
+				
+		    </h5>
+
+		    </p>
+
+		  </div>

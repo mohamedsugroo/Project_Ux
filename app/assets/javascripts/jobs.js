@@ -10,3 +10,19 @@ myApp.controller('jobsController', ['$scope','$http',
 
   }
 ]);
+
+
+myApp.controller('postController', ['$scope','$http',
+  function($scope, $http){
+
+  	$scope.myFunc = function() {
+        $scope.count++;
+    };
+
+    
+  	console.log("Ready To Go!");
+
+  	
+
+  }
+]);

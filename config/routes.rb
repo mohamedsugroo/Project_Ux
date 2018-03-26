@@ -1,29 +1,40 @@
 Rails.application.routes.draw do
 
+  resources :constatuses
+  resources :verifications
+  resources :hires
   get 'errors/error_404'
 
   get 'errors/error_422'
 
   get 'errors/error_500'
 
+  get '/company/dashboard', to:'home#companydash' , as: 'company_dash'
+
   resources :searches, path: '/search/'
   mount Ckeditor::Engine => '/ckeditor'
-  resources :companies
-  resources :ltypes
-  resources :qtypes
-  resources :qualifications
-  resources :licences
-  resources :workhistories
-  resources :people
-  resources :profile, only: [:index, :show]
+  resources :companies, path: '/company'
+  resources :ltypes, except: [:index, :show]
+  resources :qtypes, except: [:index, :show]
+  resources :qualifications, except: [:index, :show]
+  resources :licences, except: [:index, :show]
+  resources :workhistories, except: [:index, :show]
+  resources :profile, only: [:index, :show], path: '/contractor'
+
+  resources :people do 
+    get '/verify', to: 'people#verification_up', as: 'verification', via: :post
+  end
+
+
+
   resources :categories
   devise_for :users
 
   root 'home#index'
 
 
-  resources :jobs do 
-    resources :bids, except: [:show, :index]
+  resources :jobs do
+    resources :bids, except: [:index]
   end
 
   get 'settings/user/:id', to: "people#edit", as: "settings_user"

@@ -1,0 +1,54 @@
+<div class="modal fade" id="addworkhistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Work History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_for Workhistory.new do |f| %>
+      <div class="modal-body text-align-left">
+
+
+        <div class="form-group">
+          <%= f.label :role %>
+          <%= f.text_field :role, class: "form-control" %>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :company_name %>
+          <%= f.text_field :company_name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :start_date %>
+          <%= f.text_field :start_date, class: "form-control", type: 'date' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :end_date %>
+          <%= f.text_field :end_date, class: "form-control", type: 'date' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :summary %>
+          <%= f.text_area :summary, class: "form-control" %>
+        </div>
+
+        
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <%= f.submit 'Add Work History', class: "btn btn-success" %>
+      </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

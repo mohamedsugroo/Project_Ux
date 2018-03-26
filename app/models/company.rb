@@ -28,5 +28,6 @@ class Company
 
 
   belongs_to :user
+  has_many :hire
 
 end

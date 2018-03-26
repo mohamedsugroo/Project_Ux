@@ -13,7 +13,6 @@ class PeopleController < ApplicationController
     @person = Person.new
   end
 
-
   def edit
   end
 
@@ -58,6 +57,6 @@ class PeopleController < ApplicationController
     end
 
     def person_params
-      params.require(:person).permit(:first_name, :middle_name, :last_name, :first_line_address, :second_line_address, :post_code, :utr, :mobile_number, :home_number, :car_owner, :photo_id, :bio, :hourly_rate)
+      params.require(:person).permit(:first_name, :middle_name, :last_name, :city, :country, :post_code, :utr, :mobile_number, :home_number, :car_owner, :photo_id, :bio, :hourly_rate)
     end
 end

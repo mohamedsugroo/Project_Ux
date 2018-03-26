@@ -22,11 +22,11 @@ class WorkhistoriesController < ApplicationController
 
     respond_to do |format|
       if @workhistory.save
-        format.html { redirect_to @workhistory, notice: 'Workhistory was successfully created.' }
+        format.html { redirect_to profile_path(current_user), notice: 'Workhistory was successfully created.' }
         format.json { render :show, status: :created, location: @workhistory }
       else
         format.html { render :new }
-        format.json { render json: @workhistory.errors, status: :unprocessable_entity }
+        format.json { render json: profile_path(current_user), status: :unprocessable_entity }
       end
     end
   end
@@ -34,11 +34,11 @@ class WorkhistoriesController < ApplicationController
   def update
     respond_to do |format|
       if @workhistory.update(workhistory_params)
-        format.html { redirect_to @workhistory, notice: 'Workhistory was successfully updated.' }
+        format.html { redirect_to profile_path(current_user), notice: 'Workhistory was successfully updated.' }
         format.json { render :show, status: :ok, location: @workhistory }
       else
         format.html { render :edit }
-        format.json { render json: @workhistory.errors, status: :unprocessable_entity }
+        format.json { render json: profile_path(current_user), status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +46,7 @@ class WorkhistoriesController < ApplicationController
   def destroy
     @workhistory.destroy
     respond_to do |format|
-      format.html { redirect_to workhistories_url, notice: 'Workhistory was successfully destroyed.' }
+      format.html { redirect_to profile_path(current_user), notice: 'Workhistory was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

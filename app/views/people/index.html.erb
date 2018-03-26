@@ -1,45 +1,14 @@
-<p id="notice"><%= notice %></p>
+<% @people.each do |person| %>
+    <%= person.first_name %>
+    <%= person.middle_name %>
+    <%= person.last_name %>
 
-<h1>People</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Middle name</th>
-      <th>Last name</th>
-      <th>First line address</th>
-      <th>Second line address</th>
-      <th>Post code</th>
-      <th>Utr</th>
-      <th>Mobile number</th>
-      <th>Home number</th>
-      <th>Car owner</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.first_name %></td>
-        <td><%= person.middle_name %></td>
-        <td><%= person.last_name %></td>
-        <td><%= person.first_line_address %></td>
-        <td><%= person.second_line_address %></td>
-        <td><%= person.post_code %></td>
-        <td><%= person.utr %></td>
-        <td><%= person.mobile_number %></td>
-        <td><%= person.home_number %></td>
-        <td><%= person.car_owner %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Person', new_person_path %>
+    <%= person.post_code %>
+    <%= person.utr %>
+    <%= person.mobile_number %>
+    <%= person.home_number %>
+    <%= person.car_owner %>
+    <%= link_to 'Show', person_path(person) %>
+    <%= link_to 'Edit', edit_person_path(person) %>
+    <%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

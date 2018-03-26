@@ -1,0 +1,32 @@
+<%= form_with(model: hire, local: true) do |form| %>
+  <% if hire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(hire.errors.count, "error") %> prohibited this hire from being saved:</h2>
+
+      <ul>
+      <% hire.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.text_field :company_id, id: :hire_company_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :person_id %>
+    <%= form.text_field :person_id, id: :hire_person_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :created_at %>
+    <%= form.text_field :created_at, id: :hire_created_at %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

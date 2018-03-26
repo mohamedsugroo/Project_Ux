@@ -1,4 +1,8 @@
+
+<% if user_signed_in? %>
+
 <% if @person.count == 1 %>
+
 
 <div class="row show_page">
 
@@ -16,11 +20,37 @@
 		    <h5 class="card-title">
 		    	
 		    	<%= @user.person.first_name %> <%= @user.person.middle_name %> <%= @user.person.last_name %>
+
 		    	<br>
 		    	<small>London, United Kingdom</small>
 		    	<br>
 		    	<small>
-		    		<span class="badge badge-danger">Pending Verification</span>
+
+
+	    			<% if @user.person.constatuses? %>
+		    			<% if @approvals.verification.name == 'Verified' %>
+			    		<span class="badge btn-success">
+		    				<%= @approvals.verification.name %>
+				    	</span>
+		    			<% end %>
+
+	    			<% else %>
+
+	    				<span class="badge badge-danger">
+	    					Pending Verification
+	    				</span>
+
+
+	    			<% end %>
+	    			<br>
+
+	    			<%= render 'profile/verificationstatus' %>
+
+	    			
+
+
+
+
 		    	</small>
 		    	<hr>
 		    	<small><strong>Hourly Rate</strong>
@@ -44,6 +74,66 @@
 			    	<% end %>
 
 			    </small>
+
+			    <br>
+
+
+			    <% if @user.person.id == current_user.person.id %>
+
+		    	<% else %>
+			    <hr>
+
+					<button type="button" class="btn bg-yellow" data-toggle="modal" data-target="#modalHire">
+					  Hire <%= @user.person.first_name %>
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="modalHire" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">
+
+						      	<% if current_user.company? %>
+							      	Hire as <%= current_user.company.name %>
+						      	<% else %>
+						      		Please Create a Comapny profile
+						      	<% end %>
+						    </h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+
+					      <%= form_for Hire.new do |h| %>
+						      <div class="modal-body">
+
+						      	<% if current_user.company? %>
+						      		Yes
+
+					      		<% else %>
+					      			No
+						      	<% end %>
+						        
+						        Are you sure you want to hire 
+						        <%= @user.person.full_name %>
+
+						        <%= h.text_field :company_id, value: current_user.company.id, type: 'hidden' %>
+						        <%= h.text_field :person_id, value: @user.person.id, type: 'hidden' %>
+
+
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						        <%= h.submit 'Yes Hire', class: 'btn btn-success' %>
+						      </div>
+
+					      <% end %>
+					    </div>
+					  </div>
+					</div>
+			    <% end %>
+
 				
 		    </h5>
 		    <p class="card-text">
@@ -97,9 +187,20 @@
 
 		  		</div>
 		  		<div class="col text-algin-right">
-		  			<a href="<%= new_workhistory_path %>" class="btn btn-success" >
+
+		  			<% if current_user.person.user_id == @user.person.user_id %>
+
+		  			<button  class="btn btn-success"  
+		  					 data-toggle="modal" 
+		  					 data-target="#addworkhistory" 
+		  					 data-whatever="@mdo" >
 			  			Add Work History
-			  		</a>
+			  		</button>
+
+			  		<% end %>
+
+
+			  		<%= render 'profile/modal' %>
 
 		  		</div>
 		  	</div>
@@ -154,6 +255,7 @@
 				        </p>
 				      </div>
 				      <div class="modal-footer">
+				      	<%= link_to 'Destroy', work, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				      </div>
 				    </div>
@@ -178,9 +280,62 @@
 		  			<h4>Qualifications</h4>
 		  		</div>
 		  		<div class="col text-algin-right">
-		  			<a href="<%= new_qualification_path %>" class="btn btn-success" >
-			  			Add New Qualification
-			  		</a>
+
+		  			<% if current_user.person.user_id == @user.person.user_id %>
+
+				  		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addqualification">
+						  Add New Qualification
+						</button>
+
+
+						<!-- Modal -->
+						<div class="modal fade" id="addqualification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content card">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">
+						        	New Qualification
+						        </h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <%= form_for Qualification.new do |f| %>
+						      <div class="modal-body text-align-left">
+
+						      	<div class="form-group">
+								    <%= f.label :qtype_id %>
+								    <%= f.collection_select :qtype_id, Qtype.all, :id, :name, {promt: 'Choose a category'}, id: :qualification_qtype, class: "form-control" %>
+								  </div>
+
+						      	<div class="form-group">
+								    <%= f.label :awarded_date %>
+								    <%= f.text_field :awarded_date, id: :qualification_awarded_date, type: "date", class: "form-control" %>
+								  </div>
+
+								  <div class="form-group">
+								    <%= f.label :expiration_date %>
+								    <%= f.text_field :expiration_date, id: :qualification_expiration_date, type: "date", class: "form-control" %>
+								  </div>
+
+
+
+						      </div>
+
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+						        <%= f.submit 'Add Qualification', class: 'btn btn-success' %>
+						      </div>
+
+						      <% end %>
+
+						    </div>
+						  </div>
+						</div>
+			  		<% end %>
+
+		  			
 
 		  		</div>
 		  	</div>
@@ -217,9 +372,11 @@
 		  			<h4>Licences</h4>
 		  		</div>
 		  		<div class="col text-algin-right">
-		  			<a href="<%= new_licence_path %>" class="btn btn-success" >
-			  			Add New Licence
-			  		</a>
+		  			<% if current_user.person.user_id == @user.person.user_id %>
+			  			<a href="<%= new_licence_path %>" class="btn btn-success" >
+				  			Add New Licence
+				  		</a>
+			  		<% end %>
 		  		</div>
 		  	</div>
 		  </div>
@@ -308,6 +465,10 @@
 </div>
 	
 <% end %>
+
+
+<% end %>
+
 
 
 <br>

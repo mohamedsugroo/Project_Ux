@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @hire.company_id %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @hire.person_id %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @hire.created_at %>
+</p>
+
+<%= link_to 'Edit', edit_hire_path(@hire) %> |
+<%= link_to 'Back', hires_path %>

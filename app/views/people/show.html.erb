@@ -16,16 +16,6 @@
 </p>
 
 <p>
-  <strong>First line address:</strong>
-  <%= @person.first_line_address %>
-</p>
-
-<p>
-  <strong>Second line address:</strong>
-  <%= @person.second_line_address %>
-</p>
-
-<p>
   <strong>Post code:</strong>
   <%= @person.post_code %>
 </p>
@@ -49,6 +39,9 @@
   <strong>Car owner:</strong>
   <%= @person.car_owner %>
 </p>
+
+
+<%= link_to("Ban", person_verification_path(@person), :confirm => "Are you sure?", :method => :put)%>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>

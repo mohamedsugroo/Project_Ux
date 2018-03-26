@@ -7,4 +7,9 @@ class HomeController < ApplicationController
 		@jobs = Job.all
 	end
 
+
+	def companydash
+		
+	end
+
 end

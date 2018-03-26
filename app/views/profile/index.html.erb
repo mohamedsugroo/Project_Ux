@@ -1,32 +1,75 @@
 
 <% @user.each do |user| %>
+	<% if user.person? %>
 
-	<div class="card" style="width: 18rem;">
-	  <img class="card-img-top" src="<%= user.person.photo_id(:large) %>" alt="Card image cap">
+		<div class="contractor_card">
+			<a href="<%= profile_path(user) %>">
 
-	  <div class="hourly_card">
-	  	£<%= user.person.hourly_rate %>
-	  </div>
+				<div class="contractor_avatar" style=" background-image: url(<%= user.person.avatar_medium %>);">
+				</div>
 
-	  <div class="card-body">
-	    <h5 class="card-title">
-	    	<small>
-		    		<span class="badge badge-danger">Pending Verification</span>
-	    	</small>
-	    	<br>
-	    	
-	    	<%= user.person.first_name %>
-	    	<%= user.person.middle_name %>
-	    	<%= user.person.last_name %>
-	    	<br>
-	    	<small>London, United Kingdom</small>
-	    </h5>
-	    <p class="card-text">
-	    	<%#= user.person.bio %>
-	    </p>
-		
-	    <a href="<%= profile_path(user) %>" class="btn btn-primary btn-lg btn-block">VIEW PROFILE</a>
-	  </div>
-	</div>
-	
+				<div class="basic_info">
+					<h5>
+						<strong><%= user.person.full_name %></strong>
+					</h5>
+					<% if user.person.city? %>
+						<h5><%= user.person.basic_local %></h5>
+					<% else %>
+						<h5>United Kingdom</h5>
+
+					<% end %>
+
+
+					<% if user.person.constatuses? %>
+						
+
+
+					<% user.person.constatuses.limit(1).each do |c| %>
+		    			<% if c.verification.name == 'Verified' %>
+			    		<span class="status bg-green">
+		    				<%= c.verification.name %>
+				    	</span>
+
+				    	<% elsif c.verification.name == 'Suspended' %>
+
+					    	<span class="status bg-yellow">
+			    				<%= c.verification.name %>
+					    	</span>
+		    			<% end %>
+
+					<% end %>
+
+
+					<% else %>
+
+			    		<span class="status bg-red">
+			    			Pending Verification
+				    	</span>
+
+
+					<% end %>
+
+
+				</div>
+
+			</a>
+
+
+				<div class="maths">
+					<div class="row">
+						<div class="col text-align-center">
+							£<%= user.person.hourly_rate %>
+						</div>
+
+						<div class="col left-hr text-align-center">
+							<%= user.person.hire.count %>
+						</div>
+					</div>
+
+
+				</div>
+
+		</div>
+
+	<% end %>		
 <% end %>
