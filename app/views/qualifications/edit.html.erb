@@ -1,6 +1,18 @@
 <h1>Editing Qualification</h1>
 
-<%= render 'form', qualification: @qualification %>
+<div class="row">
+    <div class="col-md-6 box">
+        <%= render 'form', qualification: @qualification %>
+    </div>
 
-<%= link_to 'Show', @qualification %> |
-<%= link_to 'Back', qualifications_path %>
+    <div class="col card pt-30">
+        <h4><%= @qualification.qtype.name %></h4>
+        <%= @qualification.awarded_date %>
+        <%= @qualification.expiration_date %>        
+    </div>
+</div>
+
+
+
+<%#= link_to 'Show', @qualification %> 
+<%#= link_to 'Back', qualifications_path %>

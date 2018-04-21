@@ -9,7 +9,8 @@ class HomeController < ApplicationController
 
 
 	def companydash
-		
+		@comapny = Company.where(:user_id => current_user.id)
+		@hires = Hire.where(:company_id => @company)
 	end
 
 end

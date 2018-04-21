@@ -1,19 +1,21 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :dashboard]
+  before_action :set_relatable, only: [:show, :dashboard]
 
   def index
     @companies = Company.all
   end
 
   def show
-    @jobs = Job.where(:user_id => @company.user_id)
-    @bids = Bid.where(:user_id => @company.user_id)
-
   end
 
   def new
     @company = Company.new
   end
+
+  def dashboard
+  end
+
 
   def edit
   end
@@ -56,6 +58,11 @@ class CompaniesController < ApplicationController
   private
     def set_company
       @company = Company.find(params[:id])
+    end
+
+    def set_relatable
+      @jobs = Job.where(:user_id => @company.user_id)
+      @bids = Bid.where(:user_id => @company.user_id)
     end
 
     def company_params

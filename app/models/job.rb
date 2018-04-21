@@ -56,4 +56,8 @@ class Job
     "#{title} , £#{priceperhour} , #{location_city} , #{location_country}, #{location_postcode}"
   end
 
+  def price
+    (self.priceperhour.to_f * self.number_of_hours.to_f).to_f
+  end
+
 end

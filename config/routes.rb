@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/company/dashboard', to:'home#companydash' , as: 'company_dash'
 
+  get '/dashboard/:id', to:'companies#dashboard', as: 'dashboard'
+
   resources :searches, path: '/search/'
   mount Ckeditor::Engine => '/ckeditor'
   resources :companies, path: '/company'

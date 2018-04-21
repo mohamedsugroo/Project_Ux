@@ -3,9 +3,7 @@
 
 <% if @person.count == 1 %>
 
-
 <div class="row show_page">
-
 
 	<div class="col-md-4">
 
@@ -78,61 +76,7 @@
 			    <br>
 
 
-			    <% if @user.person.id == current_user.person.id %>
-
-		    	<% else %>
-			    <hr>
-
-					<button type="button" class="btn bg-yellow" data-toggle="modal" data-target="#modalHire">
-					  Hire <%= @user.person.first_name %>
-					</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="modalHire" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">
-
-						      	<% if current_user.company? %>
-							      	Hire as <%= current_user.company.name %>
-						      	<% else %>
-						      		Please Create a Comapny profile
-						      	<% end %>
-						    </h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-
-					      <%= form_for Hire.new do |h| %>
-						      <div class="modal-body">
-
-						      	<% if current_user.company? %>
-						      		Yes
-
-					      		<% else %>
-					      			No
-						      	<% end %>
-						        
-						        Are you sure you want to hire 
-						        <%= @user.person.full_name %>
-
-						        <%= h.text_field :company_id, value: current_user.company.id, type: 'hidden' %>
-						        <%= h.text_field :person_id, value: @user.person.id, type: 'hidden' %>
-
-
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						        <%= h.submit 'Yes Hire', class: 'btn btn-success' %>
-						      </div>
-
-					      <% end %>
-					    </div>
-					  </div>
-					</div>
-			    <% end %>
+			    
 
 				
 		    </h5>
@@ -373,9 +317,61 @@
 		  		</div>
 		  		<div class="col text-algin-right">
 		  			<% if current_user.person.user_id == @user.person.user_id %>
-			  			<a href="<%= new_licence_path %>" class="btn btn-success" >
-				  			Add New Licence
-				  		</a>
+
+				  		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addNewLicence">
+						  Add New Licence
+						</button>
+
+
+						<!-- Modal -->
+						<div class="modal fade" id="addNewLicence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content card">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">
+						        	New Licence
+						        </h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <%= form_for Licence.new do |f| %>
+						      <div class="modal-body text-align-left">
+
+						      	<div class="form-group">
+								    <%= f.label :qtype_id %>
+								    <%= f.collection_select :ltype_id, Ltype.all, :id, :name, {promt: 'Choose a category'}, id: :licence_qtype, class: "form-control" %>
+								  </div>
+
+						      	<div class="form-group">
+								    <%= f.label :number %>
+								    <%= f.text_field :number, id: :licence_number, class: "form-control" %>
+								  </div>
+
+								  <div class="form-group">
+								    <%= f.label :expiration_date %>
+								    <%= f.text_field :expiration_date, id: :licence_expiration_date, type: "date", class: "form-control" %>
+								  </div>
+
+
+
+						      </div>
+
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+						        <%= f.submit 'Add Qualification', class: 'btn btn-success' %>
+						      </div>
+
+						      <% end %>
+
+						    </div>
+						  </div>
+						</div>
+
+
+
+
 			  		<% end %>
 		  		</div>
 		  	</div>
@@ -386,7 +382,7 @@
 			  	<div class="qfc remove_hr">
 				    <%= q.ltype.name %>
 				    <br>
-					<small>Awarded Date | <%= q.expiration_date %></small>
+					<small>Expiration Date | <%= q.expiration_date %></small>
 					<br>
 					<% if user_signed_in? %>
 		    		

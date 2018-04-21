@@ -1,3 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col card">
+      Jobs <br>
+      <h3><%= @jobs.count %></h3>
+    </div>
+    <div class="col card">
+      Hire <br>
+      <h3><%=  @company.hire.count %></h3>
+    </div>
+    <div class="col card bg-light ">
+      Total Cost <br>
+      <h3>£234,648</h3>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+<ul class="pricedItems">
+
+  <%= @jobs.sum(:price) %>
+  <% @jobs.each do |j| %>
+    <li data-price="<%= j.price %>" >
+      <%= j.price %>
+    </li>
+  <% end %>
+
+  <label class="result"></label>
+</ul>
+
+
+<script>
+  
+  const priceNodes = Array.from(document.querySelectorAll('[data-price]'));
+  const price = priceNodes
+    .map(node => node.dataset.price );
+
+  console.log(price)
+
+
+</script>
+
 <div class="card full-width">
 
 <br>
@@ -19,12 +62,11 @@
 
 <br><br>
 
-
 <div class="container">
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
     
-    <%= render 'home/newhires' %>
+    <%= render 'companies/newhires' %>
 
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">All Bids</div>
